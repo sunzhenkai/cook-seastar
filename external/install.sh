@@ -54,7 +54,7 @@ seastar() {
   export Protobuf_INCLUDE_DIR="$FP_DEPS/include"
   ./configure.py --mode=release --enable-dpdk --compiler=g++ --c-compiler=gcc \
     --cook fmt --c++-dialect=gnu++17 --prefix="$FP_DEPS"
-  ninja -C build/release
+  ninja -C build/release install
 }
 
 boost() {

@@ -1,3 +1,3 @@
 #!/bin/sh
 git submodule update --init --recursive
-sudo external/src/seastar/install-dependencies.sh
+# sudo bash external/src/seastar/install-dependencies.sh

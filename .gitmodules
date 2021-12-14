@@ -1,6 +1,3 @@
-[submodule "external/src/seastar"]
-	path = external/src/seastar
-	url = https://github.com/scylladb/seastar.git
 [submodule "external/common"]
 	path = external/common
 	url = git@github.com:solo-kingdom/sh-common.git

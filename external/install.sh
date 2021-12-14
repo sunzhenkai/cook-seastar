@@ -21,6 +21,7 @@ MAKE_THREAD_NUM="$(get_cpu_num)"
 # versions
 VERSION_BOOST='1_71_0'
 VERSION_SEASTAR='20.05.0'
+VERSION_PROTOBUF='3.9.1'
 
 # deps
 export LDFLAGS="-L$FP_DEPS/lib"
@@ -65,6 +66,13 @@ boost() {
   # build
   ./bootstrap.sh --without-libraries=mpi,python,graph,graph_parallel
   (./b2 --prefix="$FP_DEPS" -j "$MAKE_THREAD_NUM" threading=multi address-model=64 variant=release stage install)
+}
+
+protobuf() {
+  FP_SRC_BOOST="$FP_SRC/protobuf-$VERSION_PROTOBUF.tar.gz"
+  tar -zxf "$FP_SRC_BOOSTFP_SRC_BOOST" -C "$FP_BUILD"
+  cd "$FP_BUILD/protobuf-$VERSION_PROTOBUF"
+  ./autogen.sh && ./configure --prefix="$FP_BUILD" && make -j $MAKE_THREAD_NUM && make install
 }
 
 FP_PWD="$(pwd)"

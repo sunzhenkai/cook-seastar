@@ -3,4 +3,7 @@
 all: prepare
 
 prepare: assets/scripts/prepare.sh
-	@sh $<
+	@bash $<
+
+install: external/install.sh
+	@bash $<

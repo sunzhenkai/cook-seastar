@@ -70,7 +70,7 @@ boost() {
 
 protobuf() {
   FP_SRC_BOOST="$FP_SRC/protobuf-$VERSION_PROTOBUF.tar.gz"
-  tar -zxf "$FP_SRC_BOOSTFP_SRC_BOOST" -C "$FP_BUILD"
+  tar -zxf "$FP_SRC_BOOST" -C "$FP_BUILD"
   cd "$FP_BUILD/protobuf-$VERSION_PROTOBUF"
   ./autogen.sh && ./configure --prefix="$FP_BUILD" && make -j $MAKE_THREAD_NUM && make install
 }

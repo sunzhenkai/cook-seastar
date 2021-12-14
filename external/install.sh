@@ -49,7 +49,7 @@ seastar() {
 boost() {
   FP_SRC_BOOST="$FP_SRC/boost_$VERSION_BOOST.tar.gz"
   # concat boost
-  [ ! -e "FP_SRC_BOOST" ] && cat "$FP_SRC/boost_$VERSION_BOOST.tar.gz.part*" >"$FP_SRC_BOOST"
+  [ ! -e "FP_SRC_BOOST" ] && cat "$FP_SRC"/boost_$VERSION_BOOST.tar.gz.part* >"$FP_SRC_BOOST"
   # tar
   tar -zxf "$FP_SRC_BOOST" -C "$FP_BUILD"
   cd "$FP_BUILD/boost_$VERSION_BOOST"

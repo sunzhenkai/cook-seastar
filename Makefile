@@ -5,5 +5,5 @@ all: prepare
 prepare: assets/scripts/prepare.sh
 	@bash $<
 
-install: external/install.sh
+resolve: external/install.sh
 	@bash $<

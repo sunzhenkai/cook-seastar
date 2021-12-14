@@ -51,6 +51,7 @@ done
 seastar() {
   tar -zxf "$FP_SRC/seastar-seastar-$VERSION_SEASTAR.tar.gz" -C "$FP_BUILD"
   cd "$FP_BUILD/seastar-seastar-$VERSION_SEASTAR"
+  export Protobuf_INCLUDE_DIR="$FP_DEPS/include"
   ./configure.py --mode=release --enable-dpdk --compiler=g++ --c-compiler=gcc \
     --cook fmt --c++-dialect=gnu++17 --prefix="$FP_DEPS"
   ninja -C build/release
@@ -72,7 +73,7 @@ protobuf() {
   FP_SRC_BOOST="$FP_SRC/protobuf-$VERSION_PROTOBUF.tar.gz"
   tar -zxf "$FP_SRC_BOOST" -C "$FP_BUILD"
   cd "$FP_BUILD/protobuf-$VERSION_PROTOBUF"
-  ./autogen.sh && ./configure --prefix="$FP_BUILD" && make -j $MAKE_THREAD_NUM && make install
+  ./autogen.sh && ./configure --prefix="$FP_DEPS" && make -j $MAKE_THREAD_NUM && make install
 }
 
 FP_PWD="$(pwd)"

@@ -27,7 +27,7 @@ seastar() {
   BASE="$FP_SRC/seastar"
   echo "build seastar under $BASE"
   cd "$BASE"
-  ./configure.py --mode=release
+  ./configure.py --mode=release --c++-dialect=gnu++17
   ninja -C build/release
 }
 

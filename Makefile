@@ -1,6 +1,6 @@
 .PHONY: all
 
-all: run
+all: prepare
 
-run: assets/scripts/prepare.sh
+prepare: assets/scripts/prepare.sh
 	@sh $<

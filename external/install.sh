@@ -47,13 +47,14 @@ seastar() {
 }
 
 boost() {
+  FP_SRC_BOOST="$FP_SRC/boost_$VERSION_BOOST.tar.gz"
   # concat boost
-  cat "$FP_SRC/boost_$VERSION_BOOST.tar.gz.part*" >"$FP_SRC/boost_$VERSION_BOOST.tar.gz"
+  [ ! -e "FP_SRC_BOOST" ] && cat "$FP_SRC/boost_$VERSION_BOOST.tar.gz.part*" >"$FP_SRC_BOOST"
   # tar
-  tar -zxf "$FP_SRC/boost_$VERSION_BOOST.tar.gz" -C "$FP_BUILD"
+  tar -zxf "$FP_SRC_BOOST" -C "$FP_BUILD"
   cd "$FP_BUILD/boost_$VERSION_BOOST"
   # build
-  ./bootstrap.sh --without-libraries=mpi,python, graph, graph_parallel
+  ./bootstrap.sh --without-libraries=mpi,python,graph,graph_parallel
   (./b2 --prefix="$FP_DEPS" -j "$MAKE_THREAD_NUM" threading=multi address-model=64 variant=release stage install)
 }
 

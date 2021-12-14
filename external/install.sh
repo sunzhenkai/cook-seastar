@@ -22,6 +22,15 @@ MAKE_THREAD_NUM="$(get_cpu_num)"
 VERSION_BOOST='1_71_0'
 VERSION_SEASTAR='20.05.0'
 
+# deps
+export LDFLAGS="-L$FP_DEPS/lib"
+export CPPFLAGS="-I$FP_DEPS/include"
+export CFLAGS=-fPIC
+export LD_LIBRARY_PATH="${FP_DEPS}/lib:${LD_LIBRARY_PATH}"
+export LIBRARY_PATH="${FP_DEPS}/lib:${LIBRARY_PATH}"
+export C_INCLUDE_PATH="${FP_DEPS}/include:${C_INCLUDE_PATH}"
+export PATH=${FP_DEPS}/bin:$PATH
+
 usage() {
   cat <<EOF
   Usage: $0 [-a] [-d dependency]

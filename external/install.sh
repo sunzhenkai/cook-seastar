@@ -84,7 +84,7 @@ dpdk() {
   FP_SRC_DPDK="$FP_SRC/dpdk-$VERSION_DPDK.tar.gz"
   tar -zxf "$FP_SRC_DPDK" -C "$FP_BUILD"
   cd "$FP_BUILD/dpdk-$VERSION_DPDK"
-  meson --prefix="$FP_DEPS" build
+  meson -D-static --prefix="$FP_DEPS" build
   ninja -C build install
 }
 

@@ -32,6 +32,7 @@ export LD_LIBRARY_PATH="${FP_DEPS}/lib:${LD_LIBRARY_PATH}"
 export LIBRARY_PATH="${FP_DEPS}/lib:${LIBRARY_PATH}"
 export C_INCLUDE_PATH="${FP_DEPS}/include:${C_INCLUDE_PATH}"
 export PATH=${FP_DEPS}/bin:$PATH
+export CXXFLAGS="-fPIC -mavx -maes -O3 -Wno-sign-compare -g -Wno-narrowing -Wno-unused-function -Wno-unused-variable -Wno-error=unused-command-line-argument"
 
 usage() {
   cat <<EOF

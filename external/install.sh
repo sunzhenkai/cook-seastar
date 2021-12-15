@@ -39,7 +39,8 @@ usage() {
 EOF
 }
 
-MODULES=(boost seastar)
+# all modules & modules need to install
+MODULES=(boost protobuf dpdk seastar)
 INSTALL_MODULES=()
 while getopts ":ad:" opt; do
   case "$opt" in

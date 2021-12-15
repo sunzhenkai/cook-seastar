@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 DEPS=(meson)
 
 for dep in "${DEPS[@]}"; do
@@ -6,3 +7,5 @@ for dep in "${DEPS[@]}"; do
     echo "miss dependency: $dep"
   fi
 done
+
+echo "all dependency checking passed"

@@ -54,6 +54,8 @@ seastar() {
   tar -zxf "$FP_SRC/seastar-seastar-$VERSION_SEASTAR.tar.gz" -C "$FP_BUILD"
   cd "$FP_BUILD/seastar-seastar-$VERSION_SEASTAR"
   sudo bash install-dependencies.sh
+  export CMAKE_PREFIX_PATH="$FP_DEPS"
+  export CMAKE_LIBRARY_PATH="$LD_LIBRARY_PATH"
   ./configure.py --mode=release --enable-dpdk --compiler=g++ --c-compiler=gcc \
     --cook fmt --c++-dialect=gnu++17 --prefix="$FP_DEPS"
   ninja -C build/release install

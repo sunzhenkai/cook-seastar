@@ -53,7 +53,7 @@ done
 seastar() {
   tar -zxf "$FP_SRC/seastar-seastar-$VERSION_SEASTAR.tar.gz" -C "$FP_BUILD"
   cd "$FP_BUILD/seastar-seastar-$VERSION_SEASTAR"
-  export Protobuf_INCLUDE_DIR="$FP_DEPS/include"
+  sudo bash install-dependencies.sh
   ./configure.py --mode=release --enable-dpdk --compiler=g++ --c-compiler=gcc \
     --cook fmt --c++-dialect=gnu++17 --prefix="$FP_DEPS"
   ninja -C build/release install
@@ -79,6 +79,8 @@ protobuf() {
 }
 
 dpdk() {
+  # install dependencies
+  pip3 install pyelftools
   FP_SRC_DPDK="$FP_SRC/dpdk-$VERSION_DPDK.tar.gz"
   tar -zxf "$FP_SRC_DPDK" -C "$FP_BUILD"
   cd "$FP_BUILD/dpdk-$VERSION_DPDK"

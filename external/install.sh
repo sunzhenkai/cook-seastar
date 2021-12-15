@@ -27,7 +27,7 @@ VERSION_DPDK='19.05.0'
 # deps
 export LDFLAGS="-L$FP_DEPS/lib"
 export CPPFLAGS="-I$FP_DEPS/include"
-export CFLAGS=-fPIC
+export CFLAGS="-fPIC -Wno-error"
 export LD_LIBRARY_PATH="${FP_DEPS}/lib:${LD_LIBRARY_PATH}"
 export LIBRARY_PATH="${FP_DEPS}/lib:${LIBRARY_PATH}"
 export C_INCLUDE_PATH="${FP_DEPS}/include:${C_INCLUDE_PATH}"
@@ -56,7 +56,7 @@ seastar() {
   sudo bash install-dependencies.sh
   export CMAKE_PREFIX_PATH="$FP_DEPS"
   export CMAKE_LIBRARY_PATH="$LD_LIBRARY_PATH"
-  ./configure.py --mode=release --enable-dpdk --compiler=g++ --c-compiler=gcc \
+  ./configure.py --cflags="$CFLAGS" --mode=release --enable-dpdk --compiler=g++ --c-compiler=gcc \
     --cook fmt --c++-dialect=gnu++17 --prefix="$FP_DEPS"
   ninja -C build/release install
 }

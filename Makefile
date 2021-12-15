@@ -7,3 +7,6 @@ prepare: assets/scripts/prepare.sh
 
 update: assets/scripts/update.sh
 	@bash $<
+
+check: assets/scripts/check.sh
+	@bash $<

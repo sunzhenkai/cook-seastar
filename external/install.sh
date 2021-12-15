@@ -22,6 +22,7 @@ MAKE_THREAD_NUM="$(get_cpu_num)"
 VERSION_BOOST='1_71_0'
 VERSION_SEASTAR='20.05.0'
 VERSION_PROTOBUF='3.9.1'
+VERSION_DPDK='21.11'
 
 # deps
 export LDFLAGS="-L$FP_DEPS/lib"
@@ -74,6 +75,14 @@ protobuf() {
   tar -zxf "$FP_SRC_BOOST" -C "$FP_BUILD"
   cd "$FP_BUILD/protobuf-$VERSION_PROTOBUF"
   ./autogen.sh && ./configure --prefix="$FP_DEPS" && make -j $MAKE_THREAD_NUM && make install
+}
+
+dpdk() {
+  FP_SRC_DPDK="$FP_SRC/dpdk-$VERSION_DPDK.tar.gz"
+  tar -zxf "$FP_SRC_DPDK" -C "$FP_BUILD"
+  cd "$FP_BUILD/dpdk-$VERSION_DPDK"
+  meson --prefix="$FP_DEPS" build
+  ninja -C build install
 }
 
 FP_PWD="$(pwd)"

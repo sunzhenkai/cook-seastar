@@ -32,7 +32,6 @@ export LD_LIBRARY_PATH="${FP_DEPS}/lib:${LD_LIBRARY_PATH}"
 export LIBRARY_PATH="${FP_DEPS}/lib:${LIBRARY_PATH}"
 export C_INCLUDE_PATH="${FP_DEPS}/include:${C_INCLUDE_PATH}"
 export PATH=${FP_DEPS}/bin:$PATH
-export CXXFLAGS="-fPIC -mavx -maes -O3 -Wno-sign-compare -g -Wno-narrowing -Wno-unused-function -Wno-unused-variable -Wno-error=unused-command-line-argument"
 
 usage() {
   cat <<EOF
@@ -41,7 +40,7 @@ EOF
 }
 
 # all modules & modules need to install
-MODULES=(boost protobuf dpdk seastar)
+MODULES=(boost protobuf seastar)
 INSTALL_MODULES=()
 while getopts ":ad:" opt; do
   case "$opt" in
@@ -76,9 +75,10 @@ protobuf() {
   FP_SRC_BOOST="$FP_SRC/protobuf-$VERSION_PROTOBUF.tar.gz"
   tar -zxf "$FP_SRC_BOOST" -C "$FP_BUILD"
   cd "$FP_BUILD/protobuf-$VERSION_PROTOBUF"
-  ./autogen.sh && ./configure --prefix="$FP_DEPS" && make -j $MAKE_THREAD_NUM && make install
+  ./autogen.sh && ./configure --prefix="$FP_DEPS" && make -j "$MAKE_THREAD_NUM" && make install
 }
 
+# please ignore this, install dpdk by system package manager
 dpdk() {
   # install dependencies
   pip3 install pyelftools

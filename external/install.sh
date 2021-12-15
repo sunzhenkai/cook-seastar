@@ -86,7 +86,7 @@ dpdk() {
   tar -zxf "$FP_SRC_DPDK" -C "$FP_BUILD"
   cd "$FP_BUILD/dpdk-$VERSION_DPDK"
   meson --prefix="$FP_DEPS" build
-  ninja -C build install
+  sudo ninja -C build install
 }
 
 FP_PWD="$(pwd)"

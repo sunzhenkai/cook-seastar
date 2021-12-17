@@ -1,3 +1,0 @@
-[submodule "external/common"]
-	path = external/common
-	url = git@github.com:solo-kingdom/sh-common.git

@@ -57,7 +57,7 @@ seastar() {
   export CMAKE_PREFIX_PATH="$FP_DEPS"
   export CMAKE_LIBRARY_PATH="$LD_LIBRARY_PATH"
   ./configure.py --cflags="$CFLAGS" --mode=release --enable-dpdk --compiler=g++ --c-compiler=gcc \
-    --cook fmt --c++-dialect=gnu++20 --prefix="$FP_DEPS"
+    --cook fmt --c++-dialect=gnu++17 --prefix="$FP_DEPS"
   ninja -C build/release install
 }
 

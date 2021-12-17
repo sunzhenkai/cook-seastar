@@ -1,7 +1,7 @@
 .idea
 
 **/.DS_Store
-cmake-build-debug-remote-work
+cmake-build-debug*
 
 external/src/boost_1_71_0.tar.gz
 external/build

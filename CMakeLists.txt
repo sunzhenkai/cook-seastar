@@ -9,43 +9,35 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_FLAGS "-std=gnu++17 -O3 -fPIC -fno-omit-frame-pointer -Wno-sign-compare -pthread")
 
-set(DEPS_DIR ${CMAKE_SOURCE_DIR}/external/deps)
-set(DEPS_LIB_DIR ${DEPS_DIR}/lib)
-set(DEPS_INCLUDE_DIR ${DEPS_DIR}/include)
 set(SRC_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/include)
 
-add_definitions(-Wall -g )
+add_definitions(-Wall -g)
 
-message(STATUS "DEPS_DIR = " ${DEPS_DIR})
-message(STATUS "DEPS_INCLUDE_DIR = ${DEPS_INCLUDE_DIR}")
 message(STATUS "SRC_INCLUDE_DIR = ${SRC_INCLUDE_DIR}")
 message(STATUS "CMAKE_CURRENT_LIST_DIR = ${CMAKE_CURRENT_LIST_DIR}")
 
 # includes
-include(${CMAKE_CURRENT_LIST_DIR}/external/src/seastar/check.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/external/utils.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/external/fmt/check.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/external/boost/check.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/external/seastar/check.cmake)
 
-include_directories(${DEPS_INCLUDE_DIR})
 include_directories(${SRC_INCLUDE_DIR})
 
-# find libraries
-find_library(PROTO_BUFFER protobuf ${DEPS_LIB_DIR} NO_DEFAULT_PATH)
-find_library(PROTO_LITE protobuf-lite ${DEPS_LIB_DIR} NO_DEFAULT_PATH)
-find_library(PROTOC protoc ${DEPS_LIB_DIR} NO_DEFAULT_PATH)
-find_library(BOOST_SYSTEM boost_system ${DEPS_LIB_DIR} NO_DEFAULT_PATH)
-#find_library(SEASTAR seastar ${DEPS_LIB_DIR} NO_DEFAULT_PATH)
-
-set(EXTERNAL_LIB ${BOOST_SYSTEM} ${PROTO_BUFFER} ${PROTO_LITE} ${PROTOC})
 file(GLOB SOURCE_FILES src/*.cpp)
-#add_library(service-lib STATIC ${SOURCE_FILES})
+set(EXTRA_LIB Seastar::seastar fmt::fmt)
 
 # executables
 add_executable(hello src/sample/hello.cpp)
 
+add_executable(fmt src/sample/fmt.cpp)
+target_link_libraries(fmt fmt::fmt)
+
 add_executable(boost src/sample/boost.cpp)
-target_link_libraries(boost ${EXTERNAL_LIB})
+target_link_libraries(boost)
 
-#add_executable(sample src/tutorial/sample.cpp)
-#target_link_libraries(sample ${EXTERNAL_LIB} Seastar::seastar)
+add_executable(sample src/tutorial/sample.cpp)
+target_link_libraries(sample ${EXTRA_LIB})
 
-#add_executable(smp src/tutorial/smp.cpp)
-#target_link_libraries(smp ${EXTERNAL_LIB} -v)
+add_executable(smp src/tutorial/smp.cpp)
+target_link_libraries(smp ${EXTRA_LIB})
